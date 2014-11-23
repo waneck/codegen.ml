@@ -3,3 +3,4 @@
 www/**/*.html
 www/js/haxe.*
 !www/index.html
+!www/article1.html
