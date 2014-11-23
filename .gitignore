@@ -1,0 +1,5 @@
+*.swp
+*.swo
+www/**/*.html
+www/js/haxe.*
+!www/index.html

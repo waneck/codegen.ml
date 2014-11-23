@@ -1,0 +1,44 @@
+body {
+	margin: 0;
+	border-top: 3px solid #333;
+	color: #111;
+	font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 18px;
+}
+
+body p {
+	font-size: 19px;
+}
+
+.featured {
+	font-weight:600;
+	line-height: 29px;
+}
+
+::-moz-selection {
+  background: #000;
+  color: #fff;
+}
+
+::selection {
+  background: #000;
+  color: #fff;
+}
+
+a:hover {
+  color: white;
+	background: black;
+
+}
+
+.header {
+}
+
+.logo {
+	font-family: 'Oleo Script', 'Georgia', sans-serif;
+	font-size: 72px;
+	text-align: center;
+	line-height: 42px;
+	margin: 72px 0 72px 0;
+	color: #333;
+}
