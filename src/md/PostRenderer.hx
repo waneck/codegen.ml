@@ -11,11 +11,16 @@ class PostRenderer extends markdown.HtmlRenderer
 	var meta:MetaPost;
 	var inQuote:Bool;
 	var afterQuote:Bool;
+	var inParagraph:Bool;
+	var inTitle:Bool;
+
 	function new(meta:MetaPost)
 	{
 		super();
+		this.meta = meta;
 		inQuote = false;
 		afterQuote = false;
+		inTitle = inParagraph = false;
 	}
 
 	public function checkClose()
@@ -38,6 +43,20 @@ class PostRenderer extends markdown.HtmlRenderer
 				buffer.add('<figcaption>${txt}</figcaption>');
 				return;
 			}
+		}
+
+		if (inTitle && meta.title == null)
+		{
+			meta.title = text.text;
+		}
+
+		if (inParagraph)
+		{
+			trace(text.text);
+			if (meta.description == null)
+				meta.description = text.text;
+			else
+				meta.description += " " + text.text;
 		}
 		super.visitText(text);
 	}
@@ -86,6 +105,10 @@ class PostRenderer extends markdown.HtmlRenderer
 							element.attributes['class'] = 'img-max';
 					}
 				}
+			case 'p' if (meta.description == null):
+				inParagraph = true;
+			case 'h1':
+				inTitle = true;
 			case _:
 		}
 		return super.visitElementBefore(element);
@@ -100,6 +123,14 @@ class PostRenderer extends markdown.HtmlRenderer
 			case 'p' if (!afterQuote):
 			case _:
 				checkClose();
+		}
+
+		switch (element.tag.toLowerCase())
+		{
+			case 'p':
+				inParagraph = false;
+			case 'h1':
+				inTitle = false;
 		}
 		super.visitElementAfter(element);
 		// buffer.add('</${element.tag}>');
@@ -118,6 +149,7 @@ class PostRenderer extends markdown.HtmlRenderer
 		var meta = new MetaPost();
 		var renderer = new PostRenderer(meta);
 		var contents = renderer.render(blocks);
+		renderer.checkClose();
 		consumeLinks(meta,document.refLinks);
 
 		return { meta:meta, contents:contents };
