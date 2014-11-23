@@ -44,6 +44,7 @@ class PostRenderer extends markdown.HtmlRenderer
 
 	override public function visitElementBefore(element:ElementNode):Bool
 	{
+		//blockquote handling
 		switch (element.tag.toLowerCase())
 		{
 			case 'blockquote' if (!inQuote):
@@ -53,6 +54,38 @@ class PostRenderer extends markdown.HtmlRenderer
 			case 'p' if (afterQuote):
 			case _ if (afterQuote):
 				checkClose();
+			case _:
+		}
+
+		switch(element.tag.toLowerCase())
+		{
+			case 'img' if (element.isEmpty()):
+				var src = element.attributes['src'];
+				var alt = element.attributes['alt'];
+				if (src != null)
+				{
+					if (alt == null) alt = '';
+					if (src.indexOf('http://player.vimeo.com') >= 0)
+					{
+						buffer.add('\n<div class="media"><iframe src="$src" alt="$alt" ></iframe></div>');
+						return false;
+					} else if (src.indexOf('http://www.youtube.com/embed') >= 0) {
+						buffer.add('\n<div class="media"><iframe src="$src" alt="$alt"></iframe></div>');
+						return false;
+					}
+				}
+
+				if (alt != null)
+				{
+					var split = alt.split(':'),
+							def = split.pop();
+					switch(def)
+					{
+						case '.max':
+							element.attributes['alt'] = split.join(':');
+							element.attributes['class'] = 'img-max';
+					}
+				}
 			case _:
 		}
 		return super.visitElementBefore(element);
