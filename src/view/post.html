@@ -1,7 +1,7 @@
 <section class="row contents">
 	<article class="grid_8 offset_2 main">
 		<h1>@title</h1>
-		<div class="date">@date</div>
+		@if(date != null) {<div class="date">@date</div>}
 		@contents
 
 		<div class="tags">

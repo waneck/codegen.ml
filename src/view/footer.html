@@ -2,22 +2,19 @@
 <section class="row footer">
 	<article class="grid_8 offset_2">
 		<nav>
+			@{
+				function doNav(path:String, name:String)
+				{
+					return if(path == '/' + curaddr) 
+						name;
+					else
+						'<a href="' + path + '">' + name + '</a>';
+				}
+			}
 			<ul>
-				<li>
-					<a href="">
-						home
-					</a>
-				</li>
-				<li>
-					<a href="">
-						about
-					</a>
-				</li>
-				<li>
-					<a href="">
-						projects
-					</a>
-				</li>
+				<li>@doNav('/index.html','home')</li>
+				<li>@doNav('/about.html','about')</li>
+				<li>@doNav('/projects/index.html','projects')</li>
 			</ul>
 		</nav>
 		<ul class="icons">

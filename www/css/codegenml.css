@@ -177,6 +177,8 @@ article.main pre {
 
 section.contents {
 	margin-bottom: 48px;
+	display:block;
+	min-height: 400px;
 }
 
 /* footer */

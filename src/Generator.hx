@@ -20,8 +20,7 @@ class Generator
 
 			var path = dir != null ? 'articles/$dir/$file' : 'articles/$file';
 			var post = md.PostRenderer.fromMarkdown(File.getContent(path));
-			trace('here',post);
-			post.meta.path = '$dir/${file.substr(0,file.length-3)}';
+			post.meta.path = dir != null ? '$dir/${file.substr(0,file.length-3)}' : file.substr(0,file.length-3);
 			if (dir != null)
 				metas.push(post.meta);
 
@@ -97,12 +96,14 @@ class Generator
 		}).execute());
 		file.writeString(new view.SinglePost().setData({
 			title: post.meta.title,
-			date: post.meta.date.format('%b %d, %Y'),
+			date: post.meta.date != null ? post.meta.date.format('%b %d, %Y') : null,
 			tags: post.meta.tags,
 			description: post.meta.description,
 			contents: post.contents
 		}).execute());
-		file.writeString(new view.Footer().setData({}).execute());
+		file.writeString(new view.Footer().setData({
+			curaddr: post.meta.path
+		}).execute());
 		file.close();
 	}
 
@@ -126,7 +127,7 @@ class Generator
 				posts:[ for (post in posts.slice(i*POSTS_PER_PAGE, (i+1)*POSTS_PER_PAGE)) {
 					address: '/${post.path}.html',
 					title: post.title,
-					date: post.date.format('%b %d, %Y'),
+					date: post.date != null ? post.date.format('%b %d, %Y') : null,
 					tags: post.tags,
 					description: post.description
 				} ],
@@ -134,7 +135,9 @@ class Generator
 				currentPage:i,
 				total: posts.length,
 			}).execute());
-			file.writeString(new view.Footer().setData({}).execute());
+			file.writeString(new view.Footer().setData({
+				curaddr: dest + (i == 0 ? '' : '-$i') + '.html'
+			}).execute());
 			file.close();
 		}
 	}
