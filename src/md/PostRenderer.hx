@@ -106,7 +106,7 @@ class PostRenderer extends markdown.HtmlRenderer
 							element.attributes['class'] = 'img-max';
 					}
 				}
-			case 'p' if (meta.description == null || meta.description == ''):
+			case 'p' if (!inQuote && !afterQuote && (meta.description == null || meta.description == '')):
 				inParagraph = true;
 				element.attributes['class'] = 'featured';
 			case 'h1':

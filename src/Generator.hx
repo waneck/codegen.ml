@@ -43,19 +43,43 @@ class Generator
 				}
 			}
 		}
+
+		if (Sys.getEnv('NO_MULT') != null)
+			return;
+
 		// collect all posts
 		for (file in readDirectory('articles'))
 		{
 			if (isDirectory('articles/$file'))
 				recursedir(file);
-			else if (file.endsWith('.md'))
+			else if (file.endsWith('.md') && file != 'index.md')
 				handleMarkdown(null,file);
 		}
 		// sort by date desc
 		metas.sort(function(v1,v2) return Reflect.compare(v2.date.date,v1.date.date));
 		// create main page + archive
-		expandMult('Introduction text',metas,'www/index');
+		var introText = md.PostRenderer.fromMarkdown(File.getContent('articles/index.md')).contents;
+		expandMult(introText,'Home', metas,'index');
+
 		// create tag pages
+		var tags = new Map();
+		for (meta in metas)
+		{
+			for (tag in meta.tags)
+			{
+				var t = tags[tag.name];
+				if (t == null)
+				{
+					tags[tag.name] = t = [];
+				}
+				t.push(meta);
+			}
+		}
+		if (!exists('www/tags')) createDirectory('www/tags');
+		for (tag in tags.keys())
+		{
+			expandMult("Posts tagged '" + tag + "'",'Tag $tag', tags[tag],'tags/${new Tag(tag).normalized}');
+		}
 	}
 
 	private static function expandPost(post:Post)
@@ -79,9 +103,39 @@ class Generator
 			contents: post.contents
 		}).execute());
 		file.writeString(new view.Footer().setData({}).execute());
+		file.close();
 	}
 
-	private static function expandMult(featured:String, posts:Array<PostMeta>, dest:String)
+	private static function expandMult(featured:String, title:String, posts:Array<PostMeta>, dest:String)
 	{
+		var numPages = Std.int(Math.ceil(posts.length / POSTS_PER_PAGE));
+		var pages = [ for (i in 0...numPages) { num:i, addr: i == 0 ? '/$dest.html' : '/$dest-$i.html' } ];
+		for (i in 0...numPages)
+		{
+			var file = File.write('www/$dest' + (i == 0 ? '' : '-$i') + '.html');
+			file.writeString(new view.HtmlHeader().setData({
+				title: title + (i != 0 ? ' - page $i' : '') + ' - codegen.ml',
+				author: null,
+				description: null,
+				keywords: null,
+			}).execute());
+			file.writeString(new view.Header().setData({
+				featured: featured
+			}).execute());
+			file.writeString(new view.PostList().setData({
+				posts:[ for (post in posts.slice(i*POSTS_PER_PAGE, (i+1)*POSTS_PER_PAGE)) {
+					address: '/${post.path}.html',
+					title: post.title,
+					date: post.date.format('%b %d, %Y'),
+					tags: post.tags,
+					description: post.description
+				} ],
+				pages:pages,
+				currentPage:i,
+				total: posts.length,
+			}).execute());
+			file.writeString(new view.Footer().setData({}).execute());
+			file.close();
+		}
 	}
 }

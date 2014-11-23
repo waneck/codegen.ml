@@ -17,11 +17,9 @@
 	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/codepen-embed.min.css">
 	<meta charset="UTF-8" />
 	<title>@title</title>
-	<meta name="description" content="@description">
-	<meta name="author" content="@author">
-	@if (keywords != null) {
-	<meta name="keywords" content="@(keywords.join(","))">
-	}
+	@if (description != null) { <meta name="description" content="@description"> }
+	@if (author != null) { <meta name="author" content="@author"> }
+	@if (keywords != null) { <meta name="keywords" content="@(keywords.join(","))"> }
 	<!--[if lt IE 9]>
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
