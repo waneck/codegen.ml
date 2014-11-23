@@ -52,6 +52,10 @@ article .tags {
 	/* text-align: right; */
 }
 
+article img {
+	max-width: 100%;
+}
+
 article .tags a.tag {
 	background-color: #FDFDFD;
 	border-bottom: 1px solid #DDDDDD;
@@ -220,4 +224,24 @@ ul.icons li a:hover {
 .contrib p {
 	margin: 0;
 	font-size: 9px;
+}
+
+section.footer-attribution {
+	text-align: center;
+	margin-top: 14px;
+	padding-top: 42px;
+	font-size: 11px;
+	color: white;
+	background-color: #333;
+}
+
+section.footer-attribution a {
+	color: white;
+}
+
+div.haxe-bw-invert-small {
+	width: 48px;
+	height: 48px;
+	background-image: url(../img/haxe-bw-invert-small.png);
+	margin: 0 auto 12px;
 }

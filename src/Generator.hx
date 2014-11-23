@@ -10,9 +10,25 @@ using StringTools;
  **/
 class Generator
 {
+	public static inline var POSTS_PER_PAGE = 2;
+
 	static function main()
 	{
 		var metas = [];
+		function handleMarkdown(dir:String, file:String)
+		{
+
+			var path = dir != null ? 'articles/$dir/$file' : 'articles/$file';
+			var post = md.PostRenderer.fromMarkdown(File.getContent(path));
+			trace('here',post);
+			post.meta.path = '$dir/${file.substr(0,file.length-3)}';
+			if (dir != null)
+				metas.push(post.meta);
+
+			//for each post, expand
+			expandPost(post);
+		}
+
 		function recursedir(dir:String)
 		{
 			if (!exists('www/$dir')) createDirectory('www/$dir');
@@ -23,13 +39,7 @@ class Generator
 				{
 					recursedir('$dir/$file');
 				} else if (file.endsWith('.md')) {
-					var post = md.PostRenderer.fromMarkdown(File.getContent(path));
-					trace('here',post);
-					post.meta.path = '$dir/${file.substr(0,file.length-3)}';
-					//for each post, expand
-					metas.push(post.meta);
-
-					expandPost(post);
+					handleMarkdown(dir,file);
 				}
 			}
 		}
@@ -38,6 +48,8 @@ class Generator
 		{
 			if (isDirectory('articles/$file'))
 				recursedir(file);
+			else if (file.endsWith('.md'))
+				handleMarkdown(null,file);
 		}
 		// sort by date desc
 		metas.sort(function(v1,v2) return Reflect.compare(v2.date.date,v1.date.date));

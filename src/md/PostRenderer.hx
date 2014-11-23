@@ -11,6 +11,7 @@ class PostRenderer extends markdown.HtmlRenderer
 	var meta:PostMeta;
 	var inQuote:Bool;
 	var afterQuote:Bool;
+
 	var inParagraph:Bool;
 	var inTitle:Bool;
 
@@ -40,7 +41,7 @@ class PostRenderer extends markdown.HtmlRenderer
 			var txt = text.text.trim();
 			if (txt.startsWith('--'))
 			{
-				buffer.add('<figcaption>${txt}</figcaption>');
+				buffer.add('<figcaption>${txt.substr(2)}</figcaption>');
 				return;
 			}
 		}
@@ -48,6 +49,7 @@ class PostRenderer extends markdown.HtmlRenderer
 		if (inTitle && meta.title == null)
 		{
 			meta.title = text.text;
+			return;
 		}
 
 		if (inParagraph)
@@ -121,7 +123,7 @@ class PostRenderer extends markdown.HtmlRenderer
 			case 'blockquote':
 				afterQuote = true;
 			case 'p' if (!afterQuote):
-			case _:
+			case _ if(afterQuote):
 				checkClose();
 		}
 
@@ -166,8 +168,5 @@ class PostRenderer extends markdown.HtmlRenderer
 				meta.tags.push(tag);
 		meta.date = getDate('date');
 		meta.modified = getDate('modified');
-
-	// public var title:Null<String>;
-	// public var description:Null<String>;
 	}
 }
