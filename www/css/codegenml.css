@@ -105,7 +105,7 @@ h1 a,h2 a {
 	text-decoration:none;
 }
 
-p a:hover {
+section.contents p a:hover, p.featured a:hover {
   color: white;
 	background: #333;
 
@@ -113,7 +113,7 @@ p a:hover {
 	transition: background .5s,color .5s;
 }
 
-p a {
+section.contents p a, p.featured a {
 	color: #333:
 
 	-webkit-transition: background .5s,color .5s;
@@ -144,6 +144,10 @@ article.main .media {
 	line-height: 42px;
 	margin: 72px 0 89px 0;
 	color: #333;
+}
+
+.logo a {
+	text-decoration: none;
 }
 
 article.main h1 {

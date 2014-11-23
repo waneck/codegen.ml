@@ -1,0 +1,16 @@
+<section class="row contents">
+	<article class="grid_8 offset_2 main">
+		<h1>@title</h1>
+		<div class="date">@date</div>
+		<p class="featured">@description</p>
+		@contents
+
+		<div class="tags">
+		@for (tag in post.tags)
+		{
+			<a class="tag" href="@post.getAddress()" >@post.name</a>
+		}
+		</div>
+	</article>
+</section>
+

@@ -1,10 +1,12 @@
--cp src
--js www/js/haxe.js
--main JsMain
--debug
-
---next
+#-cp src
+#-js www/js/haxe.js
+#-main JsMain
+#-debug
+#
+#--next
 -cp src
 -main Generator
 -lib erazor
+-lib geotools
+-lib markdown
 --interp
