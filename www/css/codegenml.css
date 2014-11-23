@@ -2,17 +2,50 @@ body {
 	margin: 0;
 	border-top: 3px solid #333;
 	color: #111;
-	font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-	font-size: 18px;
+	font-family: 'Cabin', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	line-height: 31px !important;
+	/* font-family: 'EB Garamond', serif; */
+	/* font-family: 'Rosario', sans-serif; */
+	/* font-size: 18px; */
+}
+
+h1,h2,h3,h4,h5,h6 {
+	color: #000;
+}
+
+a.more {
+	font-family: 'Alegreya SC', serif;
+	font-size: 20px;
 }
 
 body p {
-	font-size: 19px;
+	font-size: 20px;
+	line-height: 31px;
+	font-weight:400;
 }
 
 .featured {
-	font-weight:600;
+	font-weight: 700;
 	line-height: 29px;
+}
+
+div.date {
+	/* font-family: 'EB Garamond', serif; */
+	/* font-family: 'Rosario', sans-serif; */
+	/* font-family: 'Alegreya Sans', sans-serif; */
+	/* font-family: 'IM Fell English SC', serif; */
+	font-family: 'Alegreya SC', serif;
+	font-style:italic;
+	font-size: 21px;
+}
+
+article.preview h2 {
+	margin-bottom: 0;
+	line-height: 40px;
+}
+
+article.preview {
+	margin-top: 48px;
 }
 
 ::-moz-selection {
@@ -26,9 +59,19 @@ body p {
 }
 
 a:hover {
+	text-decoration: underline;
+}
+
+h1 a,h2 a {
+	text-decoration:none;
+}
+
+.featured a:hover {
   color: white;
 	background: black;
 
+	-webkit-transition: background .5s,color .5s;
+	transition: background .5s,color .5s;
 }
 
 .header {
@@ -39,6 +82,6 @@ a:hover {
 	font-size: 72px;
 	text-align: center;
 	line-height: 42px;
-	margin: 72px 0 72px 0;
+	margin: 72px 0 84px 0;
 	color: #333;
 }
