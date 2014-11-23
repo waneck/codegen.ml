@@ -1,6 +1,6 @@
 package data;
 
-abstract Tag(String) from String
+abstract Tag(String) from String to String
 {
 	static var regex = ~/([^A-Za-z0-9_\-]+)/g;
 

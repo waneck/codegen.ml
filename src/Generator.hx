@@ -1,5 +1,7 @@
 import sys.FileSystem.*;
 import sys.io.*;
+import data.*;
+import geo.*;
 
 using StringTools;
 /**
@@ -10,16 +12,64 @@ class Generator
 {
 	static function main()
 	{
-		// collect all posts
-		for (post in readDirectory('articles/blog'))
+		var metas = [];
+		function recursedir(dir:String)
 		{
-			if (!post.endsWith('.md')) continue;
-			trace('here',post);
-			var mdown = md.PostRenderer.fromMarkdown(File.getContent('articles/blog/$post'));
-			trace('here');
-			trace(mdown);
+			if (!exists('www/$dir')) createDirectory('www/$dir');
+			for (file in readDirectory('articles/$dir'))
+			{
+				var path = 'articles/$dir/$file';
+				if (isDirectory(path))
+				{
+					recursedir('$dir/$file');
+				} else if (file.endsWith('.md')) {
+					var post = md.PostRenderer.fromMarkdown(File.getContent(path));
+					trace('here',post);
+					post.meta.path = '$dir/${file.substr(0,file.length-3)}';
+					//for each post, expand
+					metas.push(post.meta);
+
+					expandPost(post);
+				}
+			}
 		}
-		// for each post, expand
-		// for each
+		// collect all posts
+		for (file in readDirectory('articles'))
+		{
+			if (isDirectory('articles/$file'))
+				recursedir(file);
+		}
+		// sort by date desc
+		metas.sort(function(v1,v2) return Reflect.compare(v2.date.date,v1.date.date));
+		// create main page + archive
+		expandMult('Introduction text',metas,'www/index');
+		// create tag pages
+	}
+
+	private static function expandPost(post:Post)
+	{
+		var dest = 'www/${post.meta.path}.html';
+		var file = File.write(dest,false);
+		file.writeString(new view.HtmlHeader().setData({
+			title: post.meta.title + ' - codegen.ml',
+			author: post.meta.author,
+			description: post.meta.description,
+			keywords: post.meta.tags
+		}).execute());
+		file.writeString(new view.Header().setData({
+			featured: null
+		}).execute());
+		file.writeString(new view.SinglePost().setData({
+			title: post.meta.title,
+			date: post.meta.date.format('%b %d, %Y'),
+			tags: post.meta.tags,
+			description: post.meta.description,
+			contents: post.contents
+		}).execute());
+		file.writeString(new view.Footer().setData({}).execute());
+	}
+
+	private static function expandMult(featured:String, posts:Array<PostMeta>, dest:String)
+	{
 	}
 }

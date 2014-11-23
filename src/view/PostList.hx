@@ -7,7 +7,7 @@ class PostList extends erazor.macro.SimpleTemplate<{
 	var posts:Array<{
 		var address:String;
 		var title:String;
-		var date:UnixDate;
+		var date:String;
 		var tags:Array<Tag>;
 		var description:String;
 	}>;

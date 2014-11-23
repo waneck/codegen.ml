@@ -8,13 +8,13 @@ using StringTools;
 
 class PostRenderer extends markdown.HtmlRenderer
 {
-	var meta:MetaPost;
+	var meta:PostMeta;
 	var inQuote:Bool;
 	var afterQuote:Bool;
 	var inParagraph:Bool;
 	var inTitle:Bool;
 
-	function new(meta:MetaPost)
+	function new(meta:PostMeta)
 	{
 		super();
 		this.meta = meta;
@@ -52,11 +52,10 @@ class PostRenderer extends markdown.HtmlRenderer
 
 		if (inParagraph)
 		{
-			trace(text.text);
 			if (meta.description == null)
 				meta.description = text.text;
 			else
-				meta.description += " " + text.text;
+				meta.description = (meta.description + " " + text.text).trim();
 		}
 		super.visitText(text);
 	}
@@ -105,8 +104,9 @@ class PostRenderer extends markdown.HtmlRenderer
 							element.attributes['class'] = 'img-max';
 					}
 				}
-			case 'p' if (meta.description == null):
+			case 'p' if (meta.description == null || meta.description == ''):
 				inParagraph = true;
+				element.attributes['class'] = 'featured';
 			case 'h1':
 				inTitle = true;
 			case _:
@@ -146,7 +146,7 @@ class PostRenderer extends markdown.HtmlRenderer
 		// parse ast
 		var blocks = document.parseLines(lines);
 
-		var meta = new MetaPost();
+		var meta = new PostMeta();
 		var renderer = new PostRenderer(meta);
 		var contents = renderer.render(blocks);
 		renderer.checkClose();
@@ -155,7 +155,7 @@ class PostRenderer extends markdown.HtmlRenderer
 		return { meta:meta, contents:contents };
 	}
 
-	public static function consumeLinks(meta:MetaPost, links:Map<String,Link>)
+	public static function consumeLinks(meta:PostMeta, links:Map<String,Link>)
 	{
 		inline function getData(name:String) return if (links.exists(name)) links[name].title; else null;
 		inline function getDate(name:String) return if (links.exists(name)) TzDate.fromIso(links[name].title); else null;

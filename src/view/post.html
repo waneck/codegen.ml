@@ -6,9 +6,9 @@
 		@contents
 
 		<div class="tags">
-		@for (tag in post.tags)
+		@for (tag in tags)
 		{
-			<a class="tag" href="@post.getAddress()" >@post.name</a>
+			<a class="tag" href="@tag.getAddress()" >@tag.name</a>
 		}
 		</div>
 	</article>
