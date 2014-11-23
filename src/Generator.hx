@@ -102,7 +102,7 @@ class Generator
 			contents: post.contents
 		}).execute());
 		file.writeString(new view.Footer().setData({
-			curaddr: post.meta.path
+			curaddr: post.meta.path + '.html'
 		}).execute());
 		file.close();
 	}

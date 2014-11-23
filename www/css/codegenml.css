@@ -1,12 +1,9 @@
 body {
 	margin: 0;
 	border-top: 4px solid #333;
-	/* color: #111; */
 	font-family: 'Cabin', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-	line-height: 32px !important;
+	line-height: 1.6em !important;
 	text-rendering: optimizelegibility;
-	/* font-family: 'EB Garamond', serif; */
-	/* font-family: 'Rosario', sans-serif; */
 	/* font-size: 18px; */
 }
 
@@ -18,18 +15,17 @@ h1,h2,h3,h4,h5,h6 {
 
 a.more {
 	font-family: 'Alegreya SC', serif;
-	font-size: 20px;
+	font-size: 1em;
 }
 
 body p {
 	font-size: 20px;
-	line-height: 32px;
+	line-height: 1.6em;
 	font-weight:400;
 }
 
 .featured {
 	font-weight: 700;
-	line-height: 32px;
 }
 
 p.featured {
@@ -43,7 +39,7 @@ div.date {
 	/* font-family: 'IM Fell English SC', serif; */
 	font-family: 'Alegreya SC', serif;
 	/* font-style:italic; */
-	font-size: 24px;
+	font-size: 1.2em;
 	margin-bottom:21px;
 }
 
@@ -63,8 +59,8 @@ article .tags a.tag {
 	padding: 3px 4px;
 	margin: 2px 2px 2px 0px;
 	text-decoration: none;
-	font-size: 90%;
-	line-height: 1.4;
+	font-size: 0.9em;
+	line-height: 1.4em;
 	white-space: nowrap;
 	display: inline-block;
 
@@ -127,7 +123,7 @@ section.contents p a, p.featured a {
 article figcaption {
 	/* display:block; */
 	text-align: right;
-	font-size: 14px;
+	font-size: 0.7em;
 }
 
 article figure {
@@ -167,8 +163,8 @@ article.main pre code {
 	tab-size: 2;
 	-moz-tab-size: 2;
 	-o-tab-size:  2;
-	font-size: 14px;
-	line-height: 21px;
+	font-size: 0.7em;
+	line-height: 1.05em;
 }
 
 article.main pre {
@@ -192,7 +188,7 @@ nav ul {
 	margin:0;
 	text-align:center;
 	font-family: 'Alegreya SC', serif;
-	font-size: 20px;
+	font-size: 1em;
 }
 
 nav ul li {
@@ -207,7 +203,7 @@ ul.icons {
 
 ul.icons li {
 	display:inline-block;
-	font-size: 31px;
+	font-size: 1.55em;
 	margin-right: 12px;
 }
 
@@ -225,14 +221,14 @@ ul.icons li a:hover {
 
 .contrib p {
 	margin: 0;
-	font-size: 9px;
+	font-size: 0.45em;
 }
 
 section.footer-attribution {
 	text-align: center;
 	margin-top: 14px;
 	padding-top: 42px;
-	font-size: 11px;
+	font-size: 0.750em;
 	color: white;
 	background-color: #333;
 }
@@ -246,4 +242,15 @@ div.haxe-bw-invert-small {
 	height: 48px;
 	background-image: url(../img/haxe-bw-invert-small.png);
 	margin: 0 auto 12px;
+}
+
+
+@media only screen and (max-width: 767px) {
+	body p {
+		font-size: 16px;
+		line-height: 1.8em;
+	}
+	body {
+		line-height: 2.0em !important;
+	}
 }
