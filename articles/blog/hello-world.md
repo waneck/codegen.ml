@@ -40,8 +40,8 @@ in my point of view. Moreover -- this was originally a weekend project and I'd s
 Working on a comment system would easily surpass my own deadline, and getting it right (which would mean subscription,
 mentioning, maybe an account system, etc) would take a lot of effort and go against the philosophy of this blog project.
 
-Having said this, all the alternatives I found - like [disqus](http://disqus.com:nofollow) - are ugly and may include sponsored
-links. Moreover - I don't think it really achieves its goal very well. My second thought was to use some site like [hacker news](https://news.ycombinator.com/)
+Having said this, all the alternatives I found - like [disqus](http://disqus.com:nofollow) - didn't satisfy me.
+Moreover - I don't think it really achieves its goal very well. My second thought was to use some site like [hacker news](https://news.ycombinator.com/)
 for comments. This still feels like a good idea, but it seems that some kinds of comments that would be fine
 for the website would be frowned upon in the hacker news community. 
 
