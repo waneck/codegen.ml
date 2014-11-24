@@ -10,6 +10,8 @@ class PostList extends erazor.macro.SimpleTemplate<{
 		var date:String;
 		var tags:Array<Tag>;
 		var description:String;
+
+		var issue:Null<Int>;
 	}>;
 	var pages:Array<{ num:Int, addr:String }>;
 	var currentPage:Int;

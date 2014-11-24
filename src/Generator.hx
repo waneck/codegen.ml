@@ -142,7 +142,9 @@ class Generator
 					title: post.title,
 					date: post.date != null ? post.date.format('%b %d, %Y') : null,
 					tags: post.tags,
-					description: post.description
+					description: post.description,
+
+					issue: post.githubIssue,
 				} ],
 				pages:pages,
 				currentPage:i,

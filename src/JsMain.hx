@@ -8,28 +8,27 @@ class JsMain
 		new JQuery('.comment a').each(function() {
 			var cur = JQuery.cur;
 			var addr = cur.attr('href');
-			trace('here');
-			trace(addr);
 			if (gissue.match(addr))
 			{
 				var user = gissue.matched(1),
 					repo = gissue.matched(2),
 					inum = gissue.matched(3);
 				var apiaddr = 'https://api.github.com/repos/$user/$repo/issues/$inum';
-				trace('matched',apiaddr);
 				var http = new haxe.Http(apiaddr);
 				http.async = true;
 				http.onData = function(data) {
-					trace('received data',data);
 					var json = haxe.Json.parse(data);
 					var ncomments:Int = json.comments;
-					trace(ncomments);
 					if (ncomments != null)
 					{
-						if (ncomments > 0)
+						var isMult = cur.is('.comment.mult a');
+						if (isMult)
 						{
+							cur.text(ncomments +'');
+						} else if (ncomments > 0) {
 							cur.siblings('i').removeClass('fa-comment').addClass('fa-comments');
-							cur.text('$ncomments comments. Click here to head over to Github and comment!');
+							var s = if (ncomments == 1) '' else 's';
+							cur.text('$ncomments comment$s. Click here to head over to Github!');
 						} else {
 							cur.text('Click here to be the first to comment on this post at Github!');
 						}

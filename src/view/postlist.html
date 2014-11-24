@@ -10,7 +10,18 @@
 	{
 	<article class="grid_8 offset_2 preview">
 		<h2><a href="@post.address">@post.title</a></h2>
-		@if(post.date != null) {<div class="date">@post.date</div>}
+		@if(post.date != null) 
+		{
+			<div class="date">
+				@post.date
+			@if (post.issue != null)
+			{
+				<div class="comment mult">
+					<i class="fa fa-comment"></i> <a href="https://github.com/waneck/codegen.ml/issues/@post.issue"></a>
+				</div>
+			}
+			</div>
+		}
 		<p>@post.description <a href="@post.address" class="more">more</a> </p>
 
 		<div class="tags">

@@ -111,7 +111,7 @@ article.preview {
 }
 
 a:hover {
-	text-decoration: underline;
+	text-decoration: underline !important;
 }
 
 h1 a,h2 a {
@@ -267,9 +267,18 @@ div.haxe-bw-invert-small:hover {
 	background-image: url(../img/haxe-bw-small.png);
 }
 
-.comment {
-	margin-top: 6px;
-	font-family: 'Alegreya SC', serif;
+.comment.single {
+	margin-top: 12px;
+}
+
+.comment.mult {
+	font-size: 0.750em;
+	margin-left: 7px;
+	display: inline-block;
+}
+
+.comment a {
+	text-decoration: none;
 }
 
 
