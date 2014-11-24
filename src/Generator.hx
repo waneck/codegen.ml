@@ -43,13 +43,13 @@ class Generator
 			}
 		}
 
-		if (Sys.getEnv('NO_MULT') != null)
-			return;
+		concatCss();
 
+		var doMult = Sys.getEnv("NO_MULT") == null;
 		// collect all posts
 		for (file in readDirectory('articles'))
 		{
-			if (isDirectory('articles/$file'))
+			if (isDirectory('articles/$file') && doMult)
 				recursedir(file);
 			else if (file.endsWith('.md') && file != 'index.md')
 				handleMarkdown(null,file);
@@ -81,6 +81,17 @@ class Generator
 		}
 	}
 
+	private static function concatCss()
+	{
+		var file = File.write('www/css/concat.css',false);
+		for (css in ['base','amazium','codegenml'])
+		{
+			file.writeString(File.getContent('www/css/$css.css'));
+			file.writeString('\n');
+		}
+		file.close();
+	}
+
 	private static function expandPost(post:Post)
 	{
 		var dest = 'www/${post.meta.path}.html';
@@ -99,7 +110,9 @@ class Generator
 			date: post.meta.date != null ? post.meta.date.format('%b %d, %Y') : null,
 			tags: post.meta.tags,
 			description: post.meta.description,
-			contents: post.contents
+			contents: post.contents,
+
+			issue: post.meta.githubIssue,
 		}).execute());
 		file.writeString(new view.Footer().setData({
 			curaddr: post.meta.path + '.html'

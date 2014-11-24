@@ -188,5 +188,9 @@ class PostRenderer extends markdown.HtmlRenderer
 				meta.tags.push(tag.trim());
 		meta.date = getDate('date');
 		meta.modified = getDate('modified');
+
+		var issue = getData('issue');
+		if (issue != null)
+			meta.githubIssue = Std.parseInt(issue);
 	}
 }

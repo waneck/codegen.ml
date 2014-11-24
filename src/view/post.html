@@ -10,6 +10,12 @@
 			<a class="tag" href="@tag.getAddress()" >@tag.name</a>
 		}
 		</div>
+		@if (issue != null)
+		{
+			<div class="comment">
+				<i class="fa fa-comment"></i> <a href="https://github.com/waneck/codegen.ml/issues/@issue">Comment this post at Github!</a>
+			</div>
+		}
 	</article>
 </section>
 

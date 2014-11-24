@@ -11,6 +11,8 @@ class PostMeta
 	public var modified:Null<TzDate>;
 	public var path:String;
 
+	public var githubIssue:Null<Int>;
+
 	public function new()
 	{
 		this.tags = [];

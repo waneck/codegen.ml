@@ -77,7 +77,7 @@ understanding and optimizing the low-level interactions that happen with the dat
 For my job, I've coded some tools that make servers very easy to configure and keep in sync. We call it `gooble-gobble`
 as a [reference](https://www.youtube.com/watch?v=bBXyB7niEc0) to the fact that once it's run, it adds some measures that
 only allows the server to be accessed through our own servers.
-Sadly these tools like `gooble-gobble` will hardly be released as open-source, as they are quite specific to our needs and
+Sadly these tools like `gooble-gobble` will hardly ever be released as open-source, as they are quite specific to our needs and
 setup - with specific server configurations. I'm a big fan of [convention over configuration](http://en.wikipedia.org/wiki/Convention_over_configuration).
 
 Anyway the good part of `gooble-gobble` is that in less than one minute I can configure a secure webserver - with

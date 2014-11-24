@@ -267,6 +267,11 @@ div.haxe-bw-invert-small:hover {
 	background-image: url(../img/haxe-bw-small.png);
 }
 
+.comment {
+	margin-top: 6px;
+	font-family: 'Alegreya SC', serif;
+}
+
 
 @media only screen and (max-width: 767px) {
 	body p {

@@ -2,6 +2,7 @@
 -js www/js/haxe.js
 -main JsMain
 -debug
+-D embed_js
 
 --next
 -cp src

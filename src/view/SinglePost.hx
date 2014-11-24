@@ -9,6 +9,8 @@ class SinglePost extends erazor.macro.SimpleTemplate<{
 	var tags:Array<Tag>;
 	var description:String;
 	var contents:String;
+
+	var issue:Null<Int>;
 }>
 {
 }

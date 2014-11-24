@@ -2,3 +2,4 @@
 *.swo
 www/**/*.html
 www/js/haxe.*
+www/css/concat.css
