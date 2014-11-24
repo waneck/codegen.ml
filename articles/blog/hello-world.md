@@ -102,3 +102,6 @@ Ubuntu 14.04 and nginx.
 Of course one of the big reasons for me not to worry too much about the server's lack of power is due to
 [cloudflare](https://www.cloudflare.com). The fact that the content is 100% pre-generated, and it's running
 on a RAID-10 of SSDs also helps in that sense!
+
+*Edit: In the end I ended up going with the standard 512MB server, as I'm in the middle of changing VPS providers.
+It's a shame we won't be able to test how well it performs in a 128MB one though!*
