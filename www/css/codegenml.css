@@ -7,6 +7,10 @@ body {
 	/* font-size: 18px; */
 }
 
+body, html {
+	height: 100%;
+}
+
 h1,h2,h3,h4,h5,h6 {
 	/* color: #000; */
 	font-family: 'Cabin Condensed', 'Cabin', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -187,7 +191,7 @@ article.main pre {
 section.contents {
 	margin-bottom: 48px;
 	display:block;
-	min-height: 400px;
+	min-height: 70%;
 }
 
 /* footer */
