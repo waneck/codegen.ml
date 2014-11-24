@@ -33,7 +33,7 @@ figure img.img-max {
 }
 
 .featured {
-	font-weight: 700;
+	font-weight: 600;
 }
 
 p.featured {
@@ -41,7 +41,6 @@ p.featured {
 }
 
 code {
-	/* font-family: 'Alegreya SC', serif; */
 	font-family: 'Ubuntu Mono','Consolas',Courier,monospace;
 	background-color: #EEE;
 }
@@ -51,10 +50,6 @@ article li {
 }
 
 div.date {
-	/* font-family: 'EB Garamond', serif; */
-	/* font-family: 'Rosario', sans-serif; */
-	/* font-family: 'Alegreya Sans', sans-serif; */
-	/* font-family: 'IM Fell English SC', serif; */
 	font-family: 'Alegreya SC', serif;
 	/* font-style:italic; */
 	font-size: 1.2em;

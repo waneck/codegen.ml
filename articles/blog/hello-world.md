@@ -42,11 +42,11 @@ mentioning, maybe an account system, etc) would take a lot of effort and go agai
 
 Having said this, all the alternatives I found - like [disqus](http://disqus.com:nofollow) - are ugly and may include sponsored
 links. Moreover - I don't think it really achieves its goal very well. My second thought was to use some site like [hacker news](https://news.ycombinator.com/)
-for comments. This still seems like a good idea, but after some thought it seems that some kinds of comments that would be fine
+for comments. This still feels like a good idea, but it seems that some kinds of comments that would be fine
 for the website would be frowned upon in the hacker news community. 
 
 After some thought, it seems to me that the best way to deal with comments is inspired with how [@skial](http://twitter.com/skial)
-does it with his Haxe-related news site, [haxe.io](http://haxe.io) and use [github](https://github.com).
+does it with his Haxe-related news site, [haxe.io](http://haxe.io) and use [github](https://github.com/skial/haxe.io).
 This is still very experimental for me, but I think it's a very nice idea. Since we're already using git as the platform
 to publish content, it makes sense that we use github to discuss this content. Not only this - but you can actually add comments
 inline if you wish.

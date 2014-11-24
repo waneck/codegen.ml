@@ -37,6 +37,7 @@
 <!-- <script type="text/javascript" src="js/jquery&#45;1.8.0.min.js"></script> -->
 <!-- <script type="text/javascript" src="js/amazium.js"></script> -->
 <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+<!-- Analytics -->
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -46,11 +47,26 @@
   ga('create', 'UA-57029087-1', 'auto');
   ga('send', 'pageview');
 </script>
+<!-- Highlight JS -->
 <script>
 	hljs.configure({
 		tabReplace: '\t',
 	})
 	hljs.initHighlightingOnLoad();
 </script>
+<!-- webfont extras -->
+<script type="text/javascript">
+  WebFontConfig = {
+    google: { families: [ 'Cabin:600:latin' ] }
+  };
+  (function() {
+    var wf = document.createElement('script');
+    wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+      '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+    wf.type = 'text/javascript';
+    wf.async = 'true';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s);
+  })(); </script>
 
 </body>
