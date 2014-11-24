@@ -18,10 +18,18 @@ a.more {
 	font-size: 1em;
 }
 
-body p {
+body a {
+	color: #333;
+}
+
+body p, body ul {
 	font-size: 20px;
 	line-height: 1.6em;
 	font-weight:400;
+}
+
+figure img.img-max {
+	margin: 0;
 }
 
 .featured {
@@ -30,6 +38,16 @@ body p {
 
 p.featured {
 	margin-bottom: 32px;
+}
+
+code {
+	/* font-family: 'Alegreya SC', serif; */
+	font-family: 'Ubuntu Mono','Consolas',Courier,monospace;
+	background-color: #EEE;
+}
+
+article li {
+	margin: 0;
 }
 
 div.date {
@@ -126,7 +144,7 @@ article figcaption {
 	font-size: 1em;
 }
 
-article figure {
+article figure blockquote {
 	margin: 0 25px 20px 25px;
 }
 
@@ -204,7 +222,11 @@ ul.icons {
 ul.icons li {
 	display:inline-block;
 	font-size: 1.55em;
-	margin-right: 12px;
+}
+
+ul.icons li + li:before {
+	content: " ";
+	padding-right: 12px;
 }
 
 ul.icons li a {
@@ -227,7 +249,7 @@ ul.icons li a:hover {
 section.footer-attribution {
 	text-align: center;
 	margin-top: 14px;
-	padding-top: 42px;
+	padding-top: 31px;
 	font-size: 0.750em;
 	color: white;
 	background-color: #333;
@@ -242,6 +264,12 @@ div.haxe-bw-invert-small {
 	height: 48px;
 	background-image: url(../img/haxe-bw-invert-small.png);
 	margin: 0 auto 12px;
+
+	display:none;
+}
+
+div.haxe-bw-invert-small:hover {
+	background-image: url(../img/haxe-bw-small.png);
 }
 
 

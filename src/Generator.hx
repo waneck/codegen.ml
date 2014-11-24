@@ -10,7 +10,7 @@ using StringTools;
  **/
 class Generator
 {
-	public static inline var POSTS_PER_PAGE = 2;
+	public static inline var POSTS_PER_PAGE = 25;
 
 	static function main()
 	{
@@ -21,7 +21,7 @@ class Generator
 			var path = dir != null ? 'articles/$dir/$file' : 'articles/$file';
 			var post = md.PostRenderer.fromMarkdown(File.getContent(path));
 			post.meta.path = dir != null ? '$dir/${file.substr(0,file.length-3)}' : file.substr(0,file.length-3);
-			if (dir != null)
+			if (dir != null && post.meta.date != null)
 				metas.push(post.meta);
 
 			//for each post, expand
@@ -69,7 +69,7 @@ class Generator
 				var t = tags[tag.name];
 				if (t == null)
 				{
-					tags[tag.name] = t = [];
+					tags[tag.name.toLowerCase()] = t = [];
 				}
 				t.push(meta);
 			}

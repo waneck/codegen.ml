@@ -9,8 +9,8 @@ using StringTools;
 class PostRenderer extends markdown.HtmlRenderer
 {
 	var meta:PostMeta;
-	var inQuote:Bool;
-	var afterQuote:Bool;
+	var inFigure:Bool;
+	var afterFigure:Bool;
 
 	var inParagraph:Bool;
 	var inTitle:Bool;
@@ -19,24 +19,24 @@ class PostRenderer extends markdown.HtmlRenderer
 	{
 		super();
 		this.meta = meta;
-		inQuote = false;
-		afterQuote = false;
+		inFigure = false;
+		afterFigure = false;
 		inTitle = inParagraph = false;
 	}
 
 	public function checkClose()
 	{
-		if (inQuote)
+		if (inFigure)
 		{
 			buffer.add('</figure>');
-			inQuote = false;
-			afterQuote = false;
+			inFigure = false;
+			afterFigure = false;
 		}
 	}
 
 	override public function visitText(text:TextNode):Void
 	{
-		if (inQuote && afterQuote)
+		if (inFigure && afterFigure)
 		{
 			var txt = text.text.trim();
 			if (txt.startsWith('--'))
@@ -67,12 +67,16 @@ class PostRenderer extends markdown.HtmlRenderer
 		//blockquote handling
 		switch (element.tag.toLowerCase())
 		{
-			case 'blockquote' if (!inQuote):
-				inQuote = true;
-				afterQuote = false;
+			case 'blockquote' if (!inFigure):
+				inFigure = true;
+				afterFigure = false;
 				buffer.add('\n<figure>');
-			case 'p' if (afterQuote):
-			case _ if (afterQuote):
+			case 'img' if (!inFigure && element.isEmpty()):
+				inFigure = true;
+				afterFigure = true;
+				buffer.add('\n<figure>');
+			case 'p' if (afterFigure):
+			case _ if (afterFigure):
 				checkClose();
 			case _:
 		}
@@ -106,11 +110,27 @@ class PostRenderer extends markdown.HtmlRenderer
 							element.attributes['class'] = 'img-max';
 					}
 				}
-			case 'p' if (!inQuote && !afterQuote && (meta.description == null || meta.description == '')):
+			case 'p' if (!inFigure && !afterFigure && (meta.description == null || meta.description == '')):
 				inParagraph = true;
 				element.attributes['class'] = 'featured';
 			case 'h1':
 				inTitle = true;
+			case 'a':
+				var href = element.attributes['href'];
+				if (href != null)
+				{
+					var data = href.split(':');
+					if (data.length > 0)
+					{
+						switch (data.pop())
+						{
+							case 'nofollow':
+								element.attributes['href'] = data.join(':');
+								element.attributes['rel'] = 'nofollow';
+							case _:
+						}
+					}
+				}
 			case _:
 		}
 		return super.visitElementBefore(element);
@@ -121,9 +141,9 @@ class PostRenderer extends markdown.HtmlRenderer
 		switch (element.tag.toLowerCase())
 		{
 			case 'blockquote':
-				afterQuote = true;
-			case 'p' if (!afterQuote):
-			case _ if(afterQuote):
+				afterFigure = true;
+			case 'p' if (!afterFigure):
+			case _ if(afterFigure):
 				checkClose();
 		}
 
@@ -165,7 +185,7 @@ class PostRenderer extends markdown.HtmlRenderer
 		meta.author = getData('author');
 		if (links.exists('tags'))
 			for (tag in links['tags'].title.split(','))
-				meta.tags.push(tag);
+				meta.tags.push(tag.trim());
 		meta.date = getDate('date');
 		meta.modified = getDate('modified');
 	}
