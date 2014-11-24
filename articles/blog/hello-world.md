@@ -90,7 +90,7 @@ base, I've enabled all the optimizations I've coded. They include:
 
  * Embedding small images from `<img>` tags or `url()` codes in css using base64 encode
  * Minifying all served javascript content using [uglifyjs](https://github.com/mishoo/UglifyJS)
- * Minifying all served css and html
+ * Minifying all served css
  * Pre-gzipping all text content - using the best compression possible (in the case, `advdef`).
  * Optimizing all images
 
