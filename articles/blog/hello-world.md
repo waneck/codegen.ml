@@ -29,7 +29,7 @@ taken the time to make this simple static content generator into a blogging plat
 code to justify that. Also this would also mean writing the generator code with more care, which would
 defeat the idea of a weekend project.
 
-![Too many options, maybe I should roll my own:.max](http://36.media.tumblr.com/6d2e1b6cd1f4b5cbf764c686458153fd/tumblr_mkr4v8GCDp1rzh6ewo1_1280.png)
+![Too many options, maybe I should roll my own:.max](data/choice-haxe.png)
 -- The drama of options (from http://haxememes.tumblr.com)
 
 ## No comments!?
